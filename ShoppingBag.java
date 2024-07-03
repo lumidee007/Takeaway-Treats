@@ -34,15 +34,4 @@ public class ShoppingBag<T extends PricedItem<Integer>>{
             return totalPrice;
     }
 
-
-
-        @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("ShoppingBag{\n");
-        for (Map.Entry<T, Integer> entry : shoppingBag.entrySet()) {
-            sb.append("  ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-        }
-        sb.append("}");
-        return sb.toString();
-    }
 }
