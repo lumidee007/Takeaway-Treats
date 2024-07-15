@@ -45,5 +45,25 @@ public class TakeAwaySimulator {
       return this.getOutputOnIntInput(userPrompt, intUserInputRetriever);
     }
 
+    public Food getMenuSelection(){
+      System.out.println("Our Menu options:\n");
+
+      System.out.println(menu);
+
+      String userPrompt = "Choose a menu item (Enter the corresponding number):";
+
+
+      IntUserInputRetriever<Food> intUserInputRetriever = s -> {
+        if(menu.getFood(s) != null){
+            return menu.getFood(s);
+        }else {
+          throw new IllegalArgumentException();
+        }
+      };
+
+      return this.getOutputOnIntInput(userPrompt, intUserInputRetriever);
+
+    }
+
 
 }
