@@ -30,5 +30,20 @@ public class TakeAwaySimulator {
     }
   }
 
+      public boolean shouldSimulate(){
+      String userPrompt = "\n Enter 1 to CONTINUE simulation or 0 to EXIT program:";
+      IntUserInputRetriever<Boolean> intUserInputRetriever = s -> {
+        if(s == 1 && customer.getMoney() >= menu.getLowestCostFood().getPrice()){
+            return true;
+        }else if(s == 0){
+          System.out.println("\nThank you for eating with us! Hope to see you soon!");
+          return false;
+        } else {
+          throw new IllegalArgumentException();
+        }
+      };
+      return this.getOutputOnIntInput(userPrompt, intUserInputRetriever);
+    }
+
 
 }

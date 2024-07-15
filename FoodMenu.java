@@ -24,7 +24,7 @@ public class FoodMenu {
     }
 
     // getting the cheapest food in the menu
-    public Food getlowestCostFood(){
+    public Food getLowestCostFood(){
         if(menu.isEmpty()){
             return null;
         }
