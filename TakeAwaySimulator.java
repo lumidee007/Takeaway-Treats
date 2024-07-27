@@ -65,7 +65,7 @@ public class TakeAwaySimulator {
 
     }
     
-        public boolean isStillOrderingFood(){
+public boolean isStillOrderingFood(){
 
       String userPrompt = "\nEnter 1 to CONTINUE shopping or 0 to CHECKOUT:";
 
@@ -80,5 +80,67 @@ public class TakeAwaySimulator {
       };
       return this.getOutputOnIntInput(userPrompt, intUserInputRetriever);
     }
+
+    // / CheckoutCustomer
+    public void checkoutCustomer(ShoppingBag<Food> shoppingBag){
+      System.out.println("\nProcessing payment...");
+
+      int remainingMoney = customer.getMoney() - shoppingBag.getTotalPrice();
+      customer.setMoney(remainingMoney);
+
+      System.out.println("Your remaining money is $" + remainingMoney);
+      System.out.println("\nThank you and enjoy your food!");
+     }
+
+
+
+
+
+
+      // 2. TakeOutprompt
+      public void takeOutprompt(){
+        ShoppingBag<Food> shoppingBag = new ShoppingBag<>();
+
+
+        int customerMoneyLeft = customer.getMoney();
+        
+
+        boolean stillOrdering = true;
+
+
+        while(stillOrdering){
+            System.out.println("You have $" + customerMoneyLeft + " left to spend\n");
+
+            Food item = this.getMenuSelection();
+            
+            if(customerMoneyLeft >= item.getPrice()){
+              customerMoneyLeft -= item.getPrice();
+              shoppingBag.addItem(item);
+            } else {
+              System.out.println("\nOops! Looks like you don't have enough for that. Choose another item or checkout.'");
+            }
+            stillOrdering = this.isStillOrderingFood();
+            if(stillOrdering == false){
+              checkoutCustomer(shoppingBag);
+            }
+          }
+       }
+
+      // 1. StartTakeOutSimulator
+      public void startTakeOutSimulator(){
+
+          boolean continueSimulating = true;
+
+           while(continueSimulating){
+              System.out.println(
+                "\n-----------------------------------\n Name's Table & Grill\n----------------------------------\n"
+              );
+              System.out.println("Welcome " + customer.getName() + "! ");
+
+              this.takeOutprompt();
+              
+              continueSimulating = this.shouldSimulate();
+           }
+        }
 
 }
